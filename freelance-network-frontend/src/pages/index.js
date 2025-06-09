@@ -1,0 +1,11 @@
+export { default as Loading } from "./Loading";
+export { default as RegistrationPage } from "./RegistrationPage";
+export { default as RegistrationPerformer } from "./RegistrationPerformer"
+export { default as RegistrationCustormer } from "./RegistrationCustomer"
+export { default as Main } from "./Main"
+export { default as Profile } from "./Profile"
+export { default as Favorites } from "./Favorites"
+export { default as Orders } from "./Orders"
+export { default as CreateOrder } from "./CreateOrder"
+export { default as OrderDetails } from "./OrderDetails"
+export { default as OrderDetailsCustomer } from "./OrderDetailsCustomer"

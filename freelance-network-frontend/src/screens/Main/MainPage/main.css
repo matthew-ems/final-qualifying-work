@@ -1,0 +1,302 @@
+.main-executor {
+  background-color: var(--tg-theme-bg-color);
+}
+
+/* Поисковая строка */
+.search-bar {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  width: 100%;
+  padding: 16px;
+  box-sizing: border-box;
+  border-radius: 15px;
+}
+
+.search-input {
+  flex-grow: 1;
+  height: 40px;
+  padding: 9px 18px;
+  font-size: 14px;
+  font-weight: 400;
+  background-color: var(--tg-theme-secondary-bg-color);
+  border-radius: 15px;
+  color: var(--tg-theme-text-color);
+  border: none;
+  outline: none;
+  box-sizing: border-box;
+}
+
+.search-input::placeholder {
+  color: var(--tg-theme-hint-color);
+}
+
+.search-button {
+  width: 40px;
+  height: 40px;
+  background-color: var(--tg-theme-secondary-bg-color);
+  border: none;
+  border-radius: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  color: var(--tg-theme-hint-color);
+}
+
+/* Контейнер для карточек */
+.cards-container {
+  flex-grow: 1;
+  padding: 0 16px 0 16px;
+  gap: 20px;
+  height: calc(100vh - 100px);
+  overflow-y: auto;
+  box-sizing: border-box;
+}
+
+/* Карточка */
+.card {
+  position: relative;
+  background-color: var(--tg-theme-secondary-bg-color);
+  border-radius: 15px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 10px;
+  position: relative;
+  margin-bottom: 16px;
+}
+
+/* Заголовок карточки */
+.card-title {
+  font-size: 16px;
+  font-weight: 600;
+  max-width: 80%;
+  margin-bottom: 10px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  color: var(--tg-theme-accent-text-color);
+}
+
+/* Описание карточки */
+.card-description {
+  font-size: 12px;
+  font-weight: 400;
+  color: var(--tg-theme-hint-color);
+  margin-bottom: 15px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+}
+
+/* Футер карточки */
+.card-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: auto;
+  gap: 16px;
+}
+
+/* Блок с ценой */
+.card-price {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.price {
+  font-size: 24px;
+  font-weight: 600;
+  color: var(--tg-theme-accent-text-color);
+}
+
+.price.negotiable {
+  font-size: 20px; /* Smaller font size for "По договоренности" */
+}
+
+.per {
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--tg-theme-hint-color);
+}
+
+/* Временные метки */
+.time-stamps {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.time-stamp {
+  font-size: 12px;
+  color: var(--tg-theme-hint-color);
+}
+
+.response,
+.views,
+.time {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  color: var(--tg-theme-hint-color);
+}
+
+.heart-icon {
+  position: absolute;
+  top: 10px; /* Расстояние от верхнего края карточки */
+  right: 10px; /* Расстояние от правого края карточки */
+  width: 24px; /* Ширина иконки */
+  height: 24px; /* Высота иконки */
+  cursor: pointer; /* Курсор указателя при наведении */
+}
+
+/* Затемнение фона */
+.filter-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1000; /* Поверх всех элементов, включая меню */
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+}
+
+/* Само всплывающее окно фильтра */
+.filter-modal {
+  background-color: var(--tg-theme-bg-color);
+  width: 100%;
+  height: 60%;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 16px;
+  box-sizing: border-box;
+  z-index: 1001; /* Убедимся, что оно выше чем затемнение */
+  border-top: 4px solid var(--tg-theme-button-color); /* Обводка сверху в акцентный цвет */
+
+  /* Добавляем свечение */
+  box-shadow: 0px 0px 5px 1px var(--tg-theme-button-color);
+}
+
+/* Заголовок и текст в верхней части */
+.filter-header {
+  padding-top: 16px;
+  text-align: center;
+}
+
+.filter-header h1 {
+  margin: 0;
+  font-size: 24px;
+  color: var(--tg-theme-text-color);
+}
+
+.filter-header p {
+  font-size: 14px;
+  color: var(--tg-theme-hint-color);
+}
+
+/* Скроллящийся контейнер для выбора пунктов */
+.filter-options {
+  flex-direction: column;
+  margin-top: 16px; /* Отступ сверху для блока с кнопками */
+  flex-grow: 1;
+  overflow-y: auto;
+  margin: 16px 0;
+}
+
+/* Стили для выбранных фильтров */
+.selected-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 0 16px 16px 16px;
+}
+
+.selected-filters span {
+  font-size: 14px;
+  color: var(--tg-theme-hint-color);
+}
+
+.filter-item {
+  background-color: var(--tg-theme-secondary-bg-color);
+  padding: 6px 12px;
+  border-radius: 12px;
+  font-size: 14px;
+  color: var(--tg-theme-accent-text-color);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Стиль для кнопки крестика */
+.remove-filter {
+  background: transparent;
+  border: none;
+  color: var(--tg-theme-hint-color);
+  cursor: pointer;
+  font-size: 14px;
+}
+
+/* Нижний блок с кнопкой */
+.filter-footer {
+  position: relative;
+}
+
+.filter-save-button {
+  width: 100%;
+  height: 50px;
+  background-color: var(--tg-theme-button-color);
+  border: none;
+  border-radius: 15px;
+  color: var(--tg-theme-button-text-color);
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 0 16px;
+}
+
+.filter-save-button:focus {
+  outline: none;
+}
+
+.filter-save-button:active {
+  transform: scale(0.98);
+}
+
+/* Стиль для кнопок выбора */
+.option-buttons {
+  width: 100%;
+  height: 50px;
+  border: 1px solid var(--tg-theme-hint-color);
+  background-color: transparent;
+  color: var(--tg-theme-hint-color);
+  border-radius: 15px;
+  font-size: 16px;
+  font-weight: 400;
+  cursor: pointer;
+  display: flex;
+  justify-content: center; /* Центрируем текст по горизонтали */
+  align-items: center; /* Центрируем текст по вертикали */
+  position: relative; /* Для фиксации иконки справа */
+  transition: background-color 0.3s, color 0.3s;
+  padding: 0 40px; /* Оставляем место для иконки */
+  margin: 0 0 16px 0;
+}
+
+/* Для выбранной кнопки */
+.option-button.selected {
+  border: 1px solid var(--tg-theme-accent-text-color);
+  color: var(--tg-theme-accent-text-color);
+  font-weight: 600;
+}

@@ -1,0 +1,57 @@
+.performer-step {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100vh;
+    padding: 16px;
+    box-sizing: border-box;
+  }
+  
+  .text-container h1 {
+    font-size: 24px;
+    font-weight: 600;
+  }
+  
+  .text-container p {
+    font-size: 14px;
+    font-weight: 400;
+    color: var(--tg-theme-hint-color);
+  }
+  
+  /* Стиль для поля ввода */
+  .input-container {
+    margin-top: 16px;
+  }
+  
+  .about-you-input {
+    width: 100%;
+    height: 120px;
+    padding: 10px;
+    font-size: 16px;
+    border: none;
+    border-radius: 15px;
+    background-color: var(--tg-theme-secondary-bg-color);
+    color: var(--tg-theme-hint-color);
+    resize: none; /* Отключаем возможность изменения размера */
+    box-sizing: border-box;
+  }
+  
+  .button-container {
+    display: flex;
+    justify-content: center;
+    padding-top: 16px;
+    padding-bottom: 20px;
+  }
+  
+  .continue-button {
+    width: 100%;
+    height: 50px;
+    background-color: var(--tg-theme-button-color);
+    color: var(--tg-theme-button-text-color);
+    border: none;
+    border-radius: 15px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+  }
+  

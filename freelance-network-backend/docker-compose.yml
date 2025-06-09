@@ -1,0 +1,6 @@
+﻿services:
+  freelance-network-backend:
+    image: freelance-network-backend
+    build:
+      context: .
+      dockerfile: freelance-network-backend/Dockerfile

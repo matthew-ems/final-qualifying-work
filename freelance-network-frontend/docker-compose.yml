@@ -1,0 +1,14 @@
+version: '3.4'
+
+services:
+  web:
+    build: .
+    platform: linux/amd64
+    image: front:latest
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./nginx/cert.key:/etc/nginx/ssl/cert.key
+      - ./nginx/cert.crt:/etc/nginx/ssl/cert.crt
+    environment:
+      - NODE_ENV=dev

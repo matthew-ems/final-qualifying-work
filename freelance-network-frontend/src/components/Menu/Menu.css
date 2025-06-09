@@ -1,0 +1,62 @@
+/* Стиль для меню */
+.menu {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%; 
+    background-color: var(--tg-theme-bg-color);
+    height: 12vh;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* Разделяем меню на 4 равные колонки */
+    justify-items: center; /* Центрируем элементы внутри каждой колонки */
+    align-items: center; 
+    z-index: 10;
+    padding: 0;
+}
+
+/* Убираем визуальные эффекты при клике */
+.menu-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-decoration: none;
+    font-size: 10px;
+    font-weight: 600;
+    flex-grow: 1;
+    color: var(--tg-theme-section-separator-color); /* Цвет текста для неактивного состояния */
+    transition: color 0.3s; /* Плавное изменение цвета текста */
+    padding-bottom: 10px;
+    outline: none; /* Убираем фокусное кольцо */
+    -webkit-tap-highlight-color: transparent; /* Убираем выделение при клике на сенсорных экранах */
+}
+
+.menu-item:focus,
+.menu-item:active {
+    box-shadow: none; /* Убираем эффект нажатия */
+    outline: none; /* Убираем фокусное кольцо при нажатии */
+}
+
+/* Специально для сенсорных экранов */
+.menu-item {
+    -webkit-tap-highlight-color: transparent; /* Убираем выделение при клике на сенсорных экранах */
+}
+
+
+/* Стиль для иконки элемента меню */
+.menu-item-icon {
+    width: 30px;
+    height: 30px;
+    margin-bottom: 5px;
+    color: var(--tg-theme-section-separator-color); /* Цвет иконок для неактивного состояния */
+    transition: color 0.3s; /* Плавное изменение цвета иконок */
+}
+
+/* Цвет иконок и текста для активных элементов меню */
+.menu-item.active {
+    color: var(--tg-theme-accent-text-color); /* Цвет текста для активного состояния */
+}
+
+.menu-item.active .menu-item-icon {
+    color: var(--tg-theme-accent-text-color); /* Цвет иконок для активного состояния */
+}

@@ -1,0 +1,82 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.start-screen {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  height: 100vh;
+  background-color: var(--tg-theme-bg-color);
+  padding: 16px 0;
+}
+
+/* Контейнер для SVG с паддингами слева и справа */
+.svg-container {
+  width: 100%; /* Полная ширина контейнера */
+  padding: 0 16px; /* Отступы слева и справа по 16px */
+  display: flex;
+  justify-content: center; /* Центрируем SVG */
+}
+
+.svg-container svg {
+  width: 100%;
+  height: auto;
+  max-width: 100%; /* Ограничение по ширине */
+  color: var(--tg-theme-accent-text-color);
+}
+
+.text-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center; /* Центрируем текст */
+}
+
+.text-container h1 {
+  font-size: 24px;
+  font-weight: 900;
+  color: var(--tg-theme-accent-text-color);
+}
+
+.text-container p {
+  font-size: 14px;
+  margin-top: 8px;
+  font-weight: 400;
+  color: var(--tg-theme-hint-color);
+  opacity: 0.5; /* Прозрачность 50% */
+}
+
+.buttons {
+    width: 100%;
+    padding: 0 16px; /* Отступы по 16px с каждой стороны */
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .continue-button-customer,
+  .continue-button-performer {
+    width: 100%; /* Кнопки занимают всю доступную ширину внутри контейнера */
+    height: 50px;
+    background-color: var(--tg-theme-button-color);
+    color: var(--tg-theme-button-text-color);
+    border: none;
+    border-radius: 15px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+  }
+  
+  .continue-button-customer {
+    margin-bottom: 16px; /* Расстояние между кнопками */
+  }
+  
+  .continue-button-performer {
+    margin-bottom: 0;
+  }
+  

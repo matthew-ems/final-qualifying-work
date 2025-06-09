@@ -1,0 +1,132 @@
+.profile-avatar {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin: 16px 0 10px;
+}
+
+.profile-executor {
+  height: 100%;
+  overflow-y: auto;
+  box-sizing: border-box;
+  padding: 0 16px;
+}
+
+.profile-info {
+  display: flex;
+  flex-direction: row;
+  gap: 16px;
+  margin-bottom: 7px;
+}
+
+.profile-nickname {
+  font-size: 34px;
+  font-weight: 600;
+  color: var(--tg-theme-text-color);
+}
+
+.profile-rating {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.rating-score {
+  font-weight: 600;
+  font-size: 15px;
+  color: var(--tg-theme-hint-color);
+}
+
+.profile-job-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--tg-theme-accent-text-color);
+  margin-bottom: 7px;
+}
+
+.profile-experience {
+  font-size: 16px;
+  font-weight: 400;
+  color: var(--tg-theme-text-color);
+  margin-bottom: 30px;
+}
+
+.profile-about-title {
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 10px;
+  color: var(--tg-theme-text-color);
+}
+
+.profile-about-text {
+  font-size: 16px;
+  font-weight: 400;
+  color: var(--tg-theme-text-color);
+  margin-bottom: 30px;
+}
+
+.gradient-circle {
+  position: absolute;
+  top: -500px;
+  right: -500px;
+  width: 1000px;
+  height: 1000px;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    var(--tg-theme-accent-text-color) 0%,
+    transparent 50%
+  );
+  opacity: 0.5;
+  z-index: -1;
+}
+
+.profile-button {
+  width: 100%;
+  height: 50px;
+  border-radius: 15px;
+  background-color: var(--tg-theme-button-color);
+  color: var(--tg-theme-button-text-color);
+  font-size: 14px;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal {
+  background: white;
+  padding: 20px;
+  border-radius: 5px;
+  text-align: center;
+}
+
+.modal-button {
+  margin: 10px;
+  padding: 10px 20px;
+  border: none;
+  background-color: #4caf50;
+  color: white;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.modal-button.cancel {
+  background-color: #f44336;
+}

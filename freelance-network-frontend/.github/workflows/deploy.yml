@@ -1,0 +1,98 @@
+#name: Build and Deploy
+#
+#on:
+#  push:
+#    branches:
+#      - develop
+#
+#jobs:
+#  build:
+#    runs-on: ubuntu-latest
+#
+#    steps:
+#      - name: Checkout code
+#        uses: actions/checkout@v2
+#
+#      - name: Set up Node.js
+#        uses: actions/setup-node@v2
+#        with:
+#          node-version: '16'
+#
+#      - name: Install dependencies
+#        run: npm install
+#
+#      - name: Build project
+#        run: npm run build
+#
+#      - name: Build Docker image
+#        run: docker build -t front .
+#
+#      - name: Save Docker image to tar file
+#        run: docker save -o app.tar front
+#
+#      - name: Upload artifact
+#        uses: actions/upload-artifact@v2
+#        with:
+#          name: docker-image
+#          path: app.tar
+#
+#  deploy:
+#    needs: build
+#    runs-on: ubuntu-latest
+#
+#    steps:
+#      - name: Download artifact
+#        uses: actions/download-artifact@v2
+#        with:
+#          name: docker-image
+#          path: app.tar
+#
+#      - name: Copy Docker image to server
+#        uses: appleboy/scp-action@v0.1.2
+#        with:
+#          host: ${{ secrets.REMOTE_HOST }}
+#          username: ${{ secrets.REMOTE_USER }}
+#          key: ${{ secrets.SSH_PRIVATE_KEY }}
+#          port: 22
+#          source: "app.tar"
+#          target: "/root/app.tar"
+#
+#      - name: Execute remote commands
+#        uses: appleboy/ssh-action@v0.1.2
+#        with:
+#          host: ${{ secrets.REMOTE_HOST }}
+#          username: ${{ secrets.REMOTE_USER }}
+#          key: ${{ secrets.SSH_PRIVATE_KEY }}
+#          port: 22
+#          script: |
+#            CONTAINER_NAME="dev"
+#            IMAGE_NAME="front"
+#            TAR_FILE="/root/app.tar"
+#            REMOTE_PATH="/root"
+#
+#            if docker ps | grep -q ${CONTAINER_NAME}; then
+#              echo "Stopping container '${CONTAINER_NAME}'..."
+#              docker stop ${CONTAINER_NAME}
+#            else
+#              echo "Container '${CONTAINER_NAME}' is not running."
+#            fi
+#
+#            if docker ps -a | grep -q ${CONTAINER_NAME}; then
+#              echo "Removing container '${CONTAINER_NAME}'..."
+#              docker rm ${CONTAINER_NAME}
+#            else
+#              echo "Container '${CONTAINER_NAME}' does not exist."
+#            fi
+#
+#            if [ -n "$(docker images -q)" ]; then
+#              echo "Removing all Docker images..."
+#              docker rmi $(docker images -q)
+#            else
+#              echo "No Docker images to remove."
+#            fi
+#
+#            echo "Loading Docker image '${IMAGE_NAME}'..."
+#            docker load -i ${TAR_FILE}
+#
+#            echo "Running Docker container '${CONTAINER_NAME}'..."
+#            docker run -d -p 443:443 --name ${CONTAINER_NAME} ${IMAGE_NAME}

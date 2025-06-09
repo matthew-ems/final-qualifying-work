@@ -1,0 +1,43 @@
+.performer-step {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100vh;
+    padding: 16px;
+    box-sizing: border-box;
+}
+
+.text-container {
+    text-align: center;
+    margin-bottom: 32px;
+}
+
+.text-container h1 {
+    font-size: 24px;
+    font-weight: 600;
+}
+
+.text-container p {
+    font-size: 14px;
+    font-weight: 400;
+    color: var(--tg-theme-hint-color);
+}
+
+.button-container {
+    display: flex;
+    justify-content: center;
+    padding-top: 16px;
+    padding-bottom: 20px;
+}
+
+.continue-button {
+    width: 100%;
+    height: 50px;
+    background-color: var(--tg-theme-button-color);
+    color: var(--tg-theme-button-text-color);
+    border: none;
+    border-radius: 15px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+}

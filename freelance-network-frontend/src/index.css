@@ -1,0 +1,30 @@
+html,
+body {
+  overflow: hidden;
+  font-family: "SF Pro Display", sans-serif;
+  background-color: var(--tg-theme-bg-color);
+}
+
+.container {
+  box-sizing: border-box;
+  display: flex;
+  justify-content: space-between;
+  padding: 16px 16px 32px 16px;
+  height: 100vh;
+  width: 100vw;
+}
+
+@font-face {
+  font-family: "SF Pro Display";
+  src: url("/fonts/SF-Pro-Display-Regular.otf") format("opentype");
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "SF Pro Display";
+  src: url("/fonts/SF-Pro-Display-Semibold.otf") format("opentype");
+  font-weight: 600;
+  font-style: normal;
+}
+

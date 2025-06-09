@@ -1,0 +1,59 @@
+h1 {
+    color: var(--tg-theme-link-color)
+}
+
+.bg_color {
+    color: var(--tg-theme-bg-color);
+}
+
+.text_color {
+    color:  var(--tg-theme-text-color);
+}
+
+.hint_color {
+    color:  var(--tg-theme-hint-color);
+}
+
+.link_color {
+    color: var(--tg-theme-link-color)
+}
+
+.button_color {
+    color: var(--tg-theme-button-color);
+}
+
+.button_text_color{
+    color: var(--tg-theme-button-text-color);
+}
+
+.secondary_bg_color {
+    color: var(--tg-theme-secondary-bg-color);
+}
+
+.header_bg_color {
+    color: var(--tg-theme-header-bg-color);
+}
+
+.accent_text_color {
+    color: var(--tg-theme-accent-text-color);
+}
+
+.section_bg_color{
+    color: var(--tg-theme-section-bg-color);
+}
+
+.section_header_text_color {
+    color: var(--tg-theme-section-header-text-color);
+}
+
+.section_separator_color {
+    color: var(--tg-theme-section-separator-color);
+}
+
+.subtitle_text_color {
+    color: var(--tg-theme-subtitle-text-color);
+}
+
+.destructive_text_color {
+    color: var(--tg-theme-destructive-text-color);
+}
