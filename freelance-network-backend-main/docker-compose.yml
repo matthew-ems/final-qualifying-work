@@ -1,0 +1,26 @@
+﻿version: '3.4'
+
+services:
+  app:
+    build:
+      context: FNBackend
+      dockerfile: FNBackend/Dockerfile
+    platform: linux/amd64
+    image: fn-backend:latest
+    ports:
+      - "8080:8080"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=development
+      - ASPNETCORE_DB_USER=dev
+      - ASPNETCORE_DB_PASSWORD=4bxg3:d22mil98
+      - ASPNETCORE_DB_HOST=83.217.223.141
+      - ASPNETCORE_DB_PORT=5432
+      - ASPNETCORE_DB_DATABASE=develop
+      - ASPNETCORE_DB_POOLING=true
+      - ASPNETCORE_URLS=https://*:8080
+      - ASPNETCORE_BOT_TOKEN=7451432407:AAFlgR3dy-cDmSxtjz8dx8a0r_3GT2MDTQw
+      - ASPNETCORE_DB_SERT_PATH=/https/certificate.pfx
+      - ASPNETCORE_DB_SERT_PASS=tTaWa3-^Q-Yk4d
+      - ASPNETCORE_MAX_CACHE=100
+      - ASPNETCORE_ACCESS_TOKEN_EXP=m:5
+      - ASPNETCORE_REFRESH_TOKEN_EXP=d:1

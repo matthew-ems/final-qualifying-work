@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FNBackend", "FNBackend\FNBackend.csproj", "{68A4241C-F067-4C34-A35A-CEA332E885F9}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{8F81D460-F55B-425B-A518-2BC3F219BC56}"
+	ProjectSection(SolutionItems) = preProject
+		start-data-base.sh = start-data-base.sh
+		build-and-save.sh = build-and-save.sh
+		check-logs.sh = check-logs.sh
+		restart-container.sh = restart-container.sh
+		stop-server.sh = stop-server.sh
+		.github\workflows\deploy.yml = .github\workflows\deploy.yml
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{68A4241C-F067-4C34-A35A-CEA332E885F9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{68A4241C-F067-4C34-A35A-CEA332E885F9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{68A4241C-F067-4C34-A35A-CEA332E885F9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{68A4241C-F067-4C34-A35A-CEA332E885F9}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+	EndGlobalSection
+EndGlobal

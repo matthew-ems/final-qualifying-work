@@ -1,0 +1,336 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>FNBackend</name>
+    </assembly>
+    <members>
+        <member name="M:FNBackend.Controllers.AuthController.Authorization(System.String)">
+            <summary>
+            Authenticates a user based on the provided user ID.
+            </summary>
+            <param name="userId">The ID of the user to authenticate.</param>
+            <returns>An IActionResult indicating the result of the authentication process.</returns>
+            <response code="404">Возвращается, если пользователь не зарегистрирован.</response>
+        </member>
+        <member name="M:FNBackend.Controllers.AuthController.RefreshToken(System.String)">
+            <summary>
+            Обновить токен если активный протух
+            </summary>
+            <param name="refreshToken"></param>
+            <response code="400">Возвращается, при неудачной попытке создания токена или проверке временного.</response>
+            <response code="200">Возвращается с новым JWT токеном.</response>
+        </member>
+        <member name="M:FNBackend.Controllers.OrdersController.GetMyOrders(System.String)">
+            <summary>
+            Получить все заказы, созданные текущим пользователем (заказчиком)
+            </summary>
+            <response code="200">Список заказов заказчика</response>
+            <response code="404">Пользователь не найден</response>
+        </member>
+        <member name="M:FNBackend.Controllers.OrdersController.GetAll(System.String,System.Int32,System.Nullable{System.Int32},System.String[])">
+            <summary>
+            Retrieves a paginated list of open orders using cursor-based pagination.
+            </summary>
+            <param name="userId">The ID of the user making the request.</param>
+            <param name="pageSize">The number of orders to return on one page.</param>
+            <param name="lastOrderId">The ID of the last order from the previous page.</param>
+            <returns>A paginated list of orders with additional data such as views, responses, direction, etc.</returns>
+            <response code="200">Returns the list of orders and the next cursor.</response>
+            <response code="500">If an error occurs while retrieving the orders.</response>
+            <response code="500">If orders or User not founded</response>
+        </member>
+        <member name="M:FNBackend.Controllers.OrdersController.GetOrder(System.Int32)">
+            <summary>
+            Retrieves a specific order by its ID.
+            </summary>
+            <param name="orderId">The ID of the order to retrieve.</param>
+            <returns>The requested order.</returns>
+            <response code="200">Returns the requested order.</response>
+            <response code="404">If the order is not found.</response>
+            <response code="500">If an error occurs while retrieving the order.</response>
+        </member>
+        <member name="M:FNBackend.Controllers.OrdersController.Create(System.String,FNBackend.Dto.Order.CreateOrderDto)">
+            <summary>
+            Creates a new order.
+            </summary>
+            <param name="userId">Order owner</param>
+            <param name="orderDto">The data transfer object containing the details of the order to create.</param>
+            <returns>A confirmation message.</returns>
+            <response code="200">If the order is created successfully.</response>
+            <response code="400">If the title or description is null or empty.</response>
+            <response code="500">If an error occurs while creating the order.</response>
+        </member>
+        <member name="M:FNBackend.Controllers.OrdersController.Update(System.String,FNBackend.Dto.Order.UpdateOrderDto)">
+            <summary>
+            Updates an existing order.
+            </summary>
+            <param name="userId">Order owner</param>
+            <param name="updateOrderDto">The data transfer object containing the updated details of the order.</param>
+            <returns>A confirmation message.</returns>
+            <response code="200">If the order is updated successfully.</response>
+            <response code="400">If the order is not invalid.</response>
+            <response code="404">If the order is not found.</response>
+            <response code="500">If an error occurs while updating the order.</response>
+        </member>
+        <member name="M:FNBackend.Controllers.OrdersController.Patch(System.String,System.Int32,Microsoft.AspNetCore.JsonPatch.JsonPatchDocument{FNBackend.Dto.Order.UpdateOrderDto})">
+            <summary>
+            Update order with patch
+            </summary>
+            <param name="userId">Order owner</param>
+            <param name="orderId">Patched order id</param>
+            <param name="patchDoc">Patch values</param>
+            <response code="200">If the order is updated successfully.</response>
+            <response code="400">If the order is not invalid.</response>
+            <response code="404">If the order is not found.</response>
+            <response code="500">If an error occurs while updating the order.</response>
+        </member>
+        <member name="M:FNBackend.Controllers.ProfileController.Create(System.String,FNBackend.Dto.User.ProfileCreateDto)">
+            <summary>
+            Creates a user profile for a specified user.
+            </summary>
+            <param name="userId">The ID of the user.</param>
+            <param name="profileCreateDto">The profile creation data transfer object.</param>
+            <returns>A response indicating the result of the profile creation process.</returns>
+            <response code="404">User not found.</response>
+            <response code="200">The users profile has been successfully added.</response>
+            <response code="409">This user already has a profile with this role.</response>
+        </member>
+        <member name="M:FNBackend.Controllers.ProfileController.Switch(FNBackend.Dto.User.SwitchProfileDto)">
+            <summary>
+            Changes the user's role to another if he already has a second profile.
+            </summary>
+            <param name="profileDto">Data on the roles to be changed</param>
+            <response code="200">Returned with a JWT token if the profile is successfully changed</response>
+            <response code="500">Returned if the user is not found in the system</response>
+            <response code="423">Returned if the user wants to change the role to admin or the admin wants to change the role</response>
+            <response code="400">Returned if there is no such role in the system</response>
+            <response code="404">Returned if there is no profile with the new role in the system</response>
+        </member>
+        <member name="M:FNBackend.Controllers.ProfileController.GetProfileInfo(System.String)">
+            <summary>
+            Getting user profile information
+            </summary>
+            <param name="userId"></param>
+            <response code="400">Role not found</response>
+            <response code="200">Returns profile information</response>
+            <response code="404">Returned if the user was not found or there is no profile for the current role</response>
+        </member>
+        <member name="M:FNBackend.Controllers.ResponseController.GetResponsesForOrder(System.Int32)">
+            <summary>
+            Get responses to your order
+            </summary>
+            <param name="orderId">Order Id</param>
+            <response code="200">Return responses</response>
+            <response code="404">Order not found</response>
+        </member>
+        <member name="M:FNBackend.Controllers.ResponseController.GetUserResponses(System.String)">
+            <summary>
+            Get all orders that the user responded to
+            </summary>
+            <param name="userId">User Id</param>
+            <response code="200">Returns all orders to which the user responded</response>
+            <response code="404">Profile not found or no responses</response>
+        </member>
+        <member name="M:FNBackend.Controllers.ResponseController.CreateResponse(System.Guid,FNBackend.Dto.Responce.CreateResponseDto)">
+            <summary>
+            Create a response to an order via the selected profile
+            </summary>
+            <param name="orderId">Order number</param>
+            <param name="dto">DTO for message and profile processing </param>
+            <response code="200">Response created</response>
+            <response code="409">Not enough responses</response>
+            <response code="404">There is no order with this ID</response>
+            <response code="400">Profile or user not found</response>
+        </member>
+        <member name="M:FNBackend.Controllers.ResponseController.ResetFreeResponsesIfNeeded(FNBackend.Entities.EProfileInfo)">
+            <summary>
+            Reset responses for a profile if a day has passed
+            </summary>
+            <param name="profile">User profile</param>
+        </member>
+        <member name="M:FNBackend.Controllers.UserController.GetUserInfo(System.String)">
+            <summary>
+            Retrieves the profile information for a specified user.
+            </summary>
+            <param name="userId">The ID of the user.</param>
+            <returns>The users profile information.</returns>
+            <response code="404">User not found.</response>
+            <response code="200">Successfully retrieved user information.</response>
+        </member>
+        <member name="M:FNBackend.Controllers.UserController.Register(FNBackend.Dto.User.RegisterDto)">
+            <summary>
+            Регистрирует пользователя на первичном уровне.
+            </summary>
+            <param name="data">Данные телеграм пользователя</param>
+            <response code="200">Возвращается с JWT токеном при успешной авторизации.</response>
+            <response code="500">Что то пошло не так на строне сервера. Подробности в сообщении.</response>
+            <response code="409">Возвращается если пользователь уже зарегистрирован или у него есть профиль.</response>
+        </member>
+        <member name="T:FNBackend.Dto.Order.CreateOrderDto">
+            <summary>
+            DTO for creating a new order.
+            </summary>
+        </member>
+        <member name="P:FNBackend.Dto.Order.CreateOrderDto.Title">
+            <summary>
+            The title of the order.
+            </summary>
+        </member>
+        <member name="P:FNBackend.Dto.Order.CreateOrderDto.Description">
+            <summary>
+            The description of the order.
+            </summary>
+        </member>
+        <member name="P:FNBackend.Dto.Order.CreateOrderDto.TotalAmount">
+            <summary>
+            The total amount of the order.
+            </summary>
+        </member>
+        <member name="P:FNBackend.Dto.Order.CreateOrderDto.Currency">
+            <summary>
+            The currency of the order.
+            </summary>
+        </member>
+        <member name="P:FNBackend.Dto.Order.CreateOrderDto.PaymentMethod">
+            <summary>
+            The payment method for the order.
+            </summary>
+        </member>
+        <member name="P:FNBackend.Dto.Order.CreateOrderDto.Boost">
+            <summary>
+            The identifier of the boost associated with the order.
+            </summary>
+        </member>
+        <member name="P:FNBackend.Dto.Order.CreateOrderDto.DirectionId">
+            <summary>
+            The identifier of the direction associated with the order.
+            </summary>
+        </member>
+        <member name="T:FNBackend.Dto.User.ProfileCreateDto">
+            <summary>
+            DTO for creating a user profile.
+            </summary>
+        </member>
+        <member name="P:FNBackend.Dto.User.ProfileCreateDto.Bio">
+            <summary>
+            The biography or personal description of the user.
+            </summary>
+        </member>
+        <member name="P:FNBackend.Dto.User.ProfileCreateDto.ExperienceId">
+            <summary>
+            The identifier of the user's experience level.
+            </summary>
+        </member>
+        <member name="P:FNBackend.Dto.User.ProfileCreateDto.DirectionId">
+            <summary>
+            The identifier of the user's direction or field of expertise.
+            </summary>
+        </member>
+        <member name="M:FNBackend.Roles.CheckAdminRole(System.String)">
+            <summary>
+            Checking if a role is admin
+            </summary>
+            <param name="role">Checking role</param>
+            <returns>true if role is admin</returns>
+        </member>
+        <member name="M:FNBackend.Roles.ValidationRole(System.String)">
+            <summary>
+            Checking role validity
+            </summary>
+            <param name="role">Checking role</param>
+            <returns>Will return true if the role is valid</returns>
+        </member>
+        <member name="M:FNBackend.Middlewares.TokenValidationMiddleware.InvokeAsync(Microsoft.AspNetCore.Http.HttpContext)">
+            <summary>
+            
+            </summary>
+            <param name="httpContext"></param>
+        </member>
+        <member name="M:FNBackend.Services.Implementation.JwtService.GenerateJwtTokenAsync(FNBackend.Entities.EUser)">
+            <summary>
+            Generator jwt token by user role
+            </summary>
+            <param name="user">user who needs a token</param>
+            <returns>Jwt token by user role</returns>
+        </member>
+        <member name="M:FNBackend.Services.Implementation.JwtService.GenerateJwtAndRefreshTokenAsync(FNBackend.Entities.EUser,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="user"></param>
+            <param name="userIp"></param>
+            <returns></returns>
+        </member>
+        <member name="M:FNBackend.Services.Implementation.JwtService.RefreshTokenAsync(System.String,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="token"></param>
+            <param name="userIp"></param>
+            <returns></returns>
+        </member>
+        <member name="M:FNBackend.Services.Implementation.PayLoadEncoder.EncryptPayLoad(System.String)">
+            <summary>
+            
+            </summary>
+            <param name="plainTData"></param>
+            <returns></returns>
+        </member>
+        <member name="M:FNBackend.Services.Implementation.PayLoadEncoder.DecryptPayLoad(System.String)">
+            <summary>
+            
+            </summary>
+            <param name="encryptedData"></param>
+            <returns></returns>
+        </member>
+        <member name="M:FNBackend.Services.Interfaces.IProfile.Create(System.String,System.String,FNBackend.Dto.User.ProfileCreateDto)">
+            <summary>
+            Creates a user profile for a specified user.
+            </summary>
+            <param name="userId">The ID of the user.</param>
+            <param name="userIp"></param>
+            <param name="profileCreateDto">The profile creation data transfer object.</param>
+            <returns>A response indicating the result of the profile creation process.</returns>
+            <remarks>
+            <para>Possible HTTP Status Codes:</para>
+            <list type="bullet">
+            <item><description>200: The user's profile has been successfully added.</description></item>
+            <item><description>404: User not found.</description></item>
+            <item><description>409: This user already has a profile with this role.</description></item>
+            </list>
+            </remarks>
+        </member>
+        <member name="M:FNBackend.Services.TokenCache.TryGet(System.String,System.String@)">
+            <summary>
+            Getting a personal key by user ID
+            </summary>
+            <param name="key">This is the user ID</param>
+            <param name="value">Personal key for JWT</param>
+            <returns>If value has it true</returns>
+        </member>
+        <member name="M:FNBackend.Services.TokenCache.Put(System.String,System.String)">
+            <summary>
+            Write or update record
+            </summary>
+            <param name="key">This is the user ID</param>
+            <param name="value">Personal key for JWT</param>
+        </member>
+        <member name="M:FNBackend.Services.TokenCache.ContainsKey(System.String)">
+            <summary>
+            Checking for the existence of a key
+            </summary>
+            <param name="key">This is the user ID</param>
+            <returns>If it contains, then it is true</returns>
+        </member>
+        <member name="M:FNBackend.Services.TokenCache.ClearAll">
+            <summary>
+            Clear all arrays
+            </summary>
+        </member>
+        <member name="M:FNBackend.Services.TokenCache.Count">
+            <summary>
+            Getting records count
+            </summary>
+        </member>
+    </members>
+</doc>

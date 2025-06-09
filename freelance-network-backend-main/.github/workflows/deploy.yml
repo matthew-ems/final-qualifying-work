@@ -1,0 +1,78 @@
+name: Deploy ASP.NET and Docker
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    env:
+      CONTAINER_NAME: dev
+      DOCKER_REGISTRY: docker.io
+      DOCKER_IMAGE: ${{ secrets.DOCKERHUB_USERNAME }}/fn-backend
+      DOCKER_TAG: ${{ github.sha }}
+      DB_POOLING: true
+      MAX_CACHE: 100
+      ACCESS_TOKEN_EXP: m:5
+      REFRESH_TOKEN_EXP: d:1
+      DB_DATABASE: develop
+      APP_PORT: 8080
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Login to Docker Hub
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_PASSWORD }}
+
+      - name: Build and push Docker image
+        run: |
+          cd FNBackend
+
+          IMAGE_NAME=${{ env.DOCKER_REGISTRY }}/${{ env.DOCKER_IMAGE }}
+          IMAGE_TAG=${{ env.DOCKER_TAG }}
+          IMAGE_NAME_LOWER=$(echo "$IMAGE_NAME" | tr '[:upper:]' '[:lower:]')
+
+          docker build -t "$IMAGE_NAME_LOWER:$IMAGE_TAG" .
+
+          docker push "$IMAGE_NAME_LOWER:$IMAGE_TAG"
+
+      - name: Deploy on remote server
+        uses: appleboy/ssh-action@v1.2.0
+        with:
+          host: ${{ secrets.REMOTE_HOST }}
+          username: ${{ secrets.REMOTE_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          script: |
+            set -e
+            docker login -u ${{ secrets.DOCKERHUB_USERNAME }} -p ${{ secrets.DOCKERHUB_PASSWORD }}
+
+            docker stop ${{ env.CONTAINER_NAME }} || true
+            docker rm ${{ env.CONTAINER_NAME }} || true
+
+            docker pull ${{ env.DOCKER_REGISTRY }}/${{ env.DOCKER_IMAGE }}:${{ env.DOCKER_TAG }}
+
+            docker run -d \
+              -p ${{ env.APP_PORT }}:${{ env.APP_PORT }} \
+              --name ${{ env.CONTAINER_NAME }} \
+              -e ASPNETCORE_ENVIRONMENT="development" \
+              -e ASPNETCORE_DB_USER="${{ secrets.DB_USER }}" \
+              -e ASPNETCORE_DB_PASSWORD="${{ secrets.DB_PASSWORD }}" \
+              -e ASPNETCORE_DB_HOST="${{ secrets.DB_HOST }}" \
+              -e ASPNETCORE_DB_PORT="${{ secrets.DB_PORT }}" \
+              -e ASPNETCORE_DB_DATABASE="${{ env.DB_DATABASE }}" \
+              -e ASPNETCORE_DB_POOLING="${{ env.DB_POOLING }}" \
+              -e ASPNETCORE_BOT_TOKEN="${{ secrets.BOT_TOKEN }}" \
+              -e ASPNETCORE_MAX_CACHE="${{ env.MAX_CACHE }}" \
+              -e ASPNETCORE_ACCESS_TOKEN_EXP="${{ env.ACCESS_TOKEN_EXP }}" \
+              -e ASPNETCORE_REFRESH_TOKEN_EXP="${{ env.REFRESH_TOKEN_EXP }}" \
+              ${{ env.DOCKER_REGISTRY }}/${{ env.DOCKER_IMAGE }}:${{ env.DOCKER_TAG }}
+
+            docker image prune -f
